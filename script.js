@@ -322,10 +322,9 @@ function numTotalPrevF() {
       angular = document.querySelector('.angular-settings-order__input input');
   check = validate_hight_width_angular(hightAll, widthAll, angular);
   if (check) {
-    let hightA = 0, widthA = 0;
-    hightAll.forEach(hight => { hightA +=  Number(hight.value) })
-    widthAll.forEach(width => { widthA +=  Number(width.value) })
-    let [sizeSum, angularSum] = sum_total('sizeOrAngular', angleBody, widthA * hightA, angular.value);
+     let hightA = 0
+     hightAll.forEach((hight, i) => { hightA += Number(hight.value * widthAll[i].value) });
+     let [sizeSum, angularSum] = sum_total('sizeOrAngular', angleBody, hightA, angular.value);
     let trowellingSum = sum_total('trowelling', 0, widthA * hightA, trowellingIndex),
       glueSum = sum_total('glue', glueBody, widthA * hightA, glue);
     numTotalPrev.textContent = (backConstValue.element.price * sizeSum + angularSum * backConstValue.angle.price + backConstValue.trowelling[trowellingIndex].price * trowellingSum + glueSum * backConstValue.glue.price).toLocaleString();
@@ -389,10 +388,9 @@ btnAdd.addEventListener('click', () => {
     check = validate_hight_width_angular(hightAll, widthAll, angular);
 
     if (check) {
-      let hightA = 0, widthA = 0;
-      hightAll.forEach(hight => { hightA += Number(hight.value) })
-      widthAll.forEach(width => { widthA += Number(width.value) })
-      let [sizeSum, angularSum] = sum_total('sizeOrAngular', angleBody, widthA * hightA, angular.value);
+      let hightA = 0
+      hightAll.forEach((hight, i) => { hightA += Number(hight.value * widthAll[i].value) });
+      let [sizeSum, angularSum] = sum_total('sizeOrAngular', angleBody, hightA, angular.value);
       let trowellingSum = sum_total('trowelling', 0, widthA * hightA, trowellingIndex),
           glueSum = sum_total('glue', glueBody, widthA * hightA, glue);
   
